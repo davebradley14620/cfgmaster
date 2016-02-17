@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#openssl genrsa -out private_key.pem 4096
+#
+# Create public/private key pair. 
+#
+openssl genrsa -des3 -out private.pem 4096 
+
+#
+# Extract the public key file.
+#
+openssl rsa -in private.pem -outform PEM -pubout -out public.pem

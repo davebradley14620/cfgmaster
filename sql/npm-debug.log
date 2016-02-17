@@ -1,0 +1,146 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'typescript' ]
+2 info using npm@3.6.0
+3 info using node@v5.6.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData typescript
+8 silly fetchNamedPackageData typescript
+9 silly mapToRegistry name typescript
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry uri https://registry.npmjs.org/typescript
+13 verbose request uri https://registry.npmjs.org/typescript
+14 verbose request no auth needed
+15 info attempt registry request try #1 at 6:18:44 PM
+16 verbose request id ab5fed927ca4f233
+17 http request GET https://registry.npmjs.org/typescript
+18 http 200 https://registry.npmjs.org/typescript
+19 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+19 verbose headers   etag: '"80UGQ6KVFJDHBV78STGLRGNZB"',
+19 verbose headers   'content-type': 'application/json',
+19 verbose headers   'cache-control': 'max-age=300',
+19 verbose headers   'content-length': '361474',
+19 verbose headers   'accept-ranges': 'bytes',
+19 verbose headers   date: 'Mon, 15 Feb 2016 23:18:38 GMT',
+19 verbose headers   via: '1.1 varnish',
+19 verbose headers   age: '135',
+19 verbose headers   connection: 'keep-alive',
+19 verbose headers   'x-served-by': 'cache-ord1722-ORD',
+19 verbose headers   'x-cache': 'HIT',
+19 verbose headers   'x-cache-hits': '1',
+19 verbose headers   'x-timer': 'S1455578318.065458,VS0,VE0',
+19 verbose headers   vary: 'Accept' }
+20 silly get cb [ 200,
+20 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+20 silly get     etag: '"80UGQ6KVFJDHBV78STGLRGNZB"',
+20 silly get     'content-type': 'application/json',
+20 silly get     'cache-control': 'max-age=300',
+20 silly get     'content-length': '361474',
+20 silly get     'accept-ranges': 'bytes',
+20 silly get     date: 'Mon, 15 Feb 2016 23:18:38 GMT',
+20 silly get     via: '1.1 varnish',
+20 silly get     age: '135',
+20 silly get     connection: 'keep-alive',
+20 silly get     'x-served-by': 'cache-ord1722-ORD',
+20 silly get     'x-cache': 'HIT',
+20 silly get     'x-cache-hits': '1',
+20 silly get     'x-timer': 'S1455578318.065458,VS0,VE0',
+20 silly get     vary: 'Accept' } ]
+21 verbose get saving typescript to /Users/db/.npm/registry.npmjs.org/typescript/.cache.json
+22 verbose correctMkdir /Users/db/.npm correctMkdir not in flight; initializing
+23 verbose makeDirectory /Users/db/.npm creation not in flight; initializing
+24 silly makeDirectory /Users/db/.npm uid: 501 gid: 20
+25 silly install normalizeTree
+26 silly loadCurrentTree Finishing
+27 silly loadIdealTree Starting
+28 silly install loadIdealTree
+29 silly cloneCurrentTree Starting
+30 silly install cloneCurrentTreeToIdealTree
+31 silly cloneCurrentTree Finishing
+32 silly loadShrinkwrap Starting
+33 silly install loadShrinkwrap
+34 silly loadShrinkwrap Finishing
+35 silly loadAllDepsIntoIdealTree Starting
+36 silly install loadAllDepsIntoIdealTree
+37 silly resolveWithNewModule typescript@1.7.5 checking installable status
+38 silly cache add args [ 'typescript', null ]
+39 verbose cache add spec typescript
+40 silly cache add parsed spec Result {
+40 silly cache add   raw: 'typescript',
+40 silly cache add   scope: null,
+40 silly cache add   name: 'typescript',
+40 silly cache add   rawSpec: '',
+40 silly cache add   spec: 'latest',
+40 silly cache add   type: 'tag' }
+41 silly addNamed typescript@latest
+42 verbose addNamed "latest" is being treated as a dist-tag for typescript
+43 info addNameTag [ 'typescript', 'latest' ]
+44 silly mapToRegistry name typescript
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry uri https://registry.npmjs.org/typescript
+48 verbose addNameTag registry:https://registry.npmjs.org/typescript not in flight; fetching
+49 verbose get https://registry.npmjs.org/typescript not expired, no request
+50 silly addNameTag next cb for typescript with tag latest
+51 silly addNamed typescript@1.7.5
+52 verbose addNamed "1.7.5" is a plain semver version for typescript
+53 silly mapToRegistry name typescript
+54 silly mapToRegistry using default registry
+55 silly mapToRegistry registry https://registry.npmjs.org/
+56 silly mapToRegistry uri https://registry.npmjs.org/typescript
+57 verbose addRemoteTarball https://registry.npmjs.org/typescript/-/typescript-1.7.5.tgz not in flight; adding
+58 verbose addRemoteTarball [ 'https://registry.npmjs.org/typescript/-/typescript-1.7.5.tgz',
+58 verbose addRemoteTarball   'a80fc231d9b95afeb9d10f0589560428dd0a045e' ]
+59 info retry fetch attempt 1 at 6:18:47 PM
+60 info attempt registry request try #1 at 6:18:47 PM
+61 http fetch GET https://registry.npmjs.org/typescript/-/typescript-1.7.5.tgz
+62 http fetch 200 https://registry.npmjs.org/typescript/-/typescript-1.7.5.tgz
+63 silly fetchAndShaCheck shasum a80fc231d9b95afeb9d10f0589560428dd0a045e
+64 verbose addTmpTarball /var/folders/p8/bqz6f8s512j7_lr70knczz_r0000gn/T/npm-1799-4ad39e36/registry.npmjs.org/typescript/-/typescript-1.7.5.tgz not in flight; adding
+65 verbose addTmpTarball already have metadata; skipping unpack for typescript@1.7.5
+66 verbose correctMkdir /Users/db/.npm correctMkdir not in flight; initializing
+67 silly cache afterAdd typescript@1.7.5
+68 verbose afterAdd /Users/db/.npm/typescript/1.7.5/package/package.json not in flight; writing
+69 verbose correctMkdir /Users/db/.npm correctMkdir not in flight; initializing
+70 verbose afterAdd /Users/db/.npm/typescript/1.7.5/package/package.json written
+71 silly loadAllDepsIntoIdealTree Finishing
+72 silly idealTree:prePrune lib
+72 silly idealTree:prePrune └── typescript@1.7.5
+73 silly loadIdealTree Finishing
+74 silly currentTree lib
+75 silly idealTree lib
+75 silly idealTree └── typescript@1.7.5
+76 silly generateActionsToTake Starting
+77 silly install generateActionsToTake
+78 warn checkPermissions Missing write access to /usr/local/lib/node_modules
+79 silly rollbackFailedOptional Starting
+80 silly rollbackFailedOptional Finishing
+81 silly runTopLevelLifecycles Starting
+82 silly runTopLevelLifecycles Finishing
+83 silly install printInstalled
+84 verbose stack Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+84 verbose stack     at Error (native)
+85 verbose cwd /Users/db/jdeveloper/mywork/sql
+86 error Darwin 15.3.0
+87 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "typescript"
+88 error node v5.6.0
+89 error npm  v3.6.0
+90 error path /usr/local/lib/node_modules
+91 error code EACCES
+92 error errno -13
+93 error syscall access
+94 error Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+94 error     at Error (native)
+94 error  { [Error: EACCES: permission denied, access '/usr/local/lib/node_modules']
+94 error   errno: -13,
+94 error   code: 'EACCES',
+94 error   syscall: 'access',
+94 error   path: '/usr/local/lib/node_modules' }
+95 error Please try running this command again as root/Administrator.
+96 verbose exit [ -13, true ]
