@@ -69,16 +69,16 @@ CREATE TABLE if not exists user_to_groups (
 
 
 #
-# Create the 'trait' table.
-# A 'trait' is a group of content and metadata that describes a particular
-# trait that servers below inherit.    An example of this would be a trait
+# Create the 'dossier' table.
+# A 'dossier' is a group of content and metadata that servers, or other
+# dossiers,  below it, inherit.    An example of this would be a dossier
 # called 'London Datacenter'.    All content specific to the London datacenter
-# would be attached to this trait.   Hosts in the London datacenter would
-# directly inherit from this trait.   The content in here might include a
+# would be attached to this dossier.   Hosts in the London datacenter would
+# directly inherit from this dossier.   The content in here might include a
 # London-specific ntp.conf, resolv.conf, and sendmail.cf.   
 #
-DROP TABLE IF EXISTS `trait`;
-CREATE TABLE if not exists trait
+DROP TABLE IF EXISTS `dossier`;
+CREATE TABLE if not exists dossier
 (
 	#
 	# Timestamp of the insert or last modification of this record.
@@ -99,7 +99,7 @@ CREATE TABLE if not exists trait
 
 	#
 	# Are we in read-only mode?  If so no changes will
-	# occur in this trait or any of its children.
+	# occur in this dossier or any of its children.
 	#
 	readonly ENUM('N','Y') NOT NULL DEFAULT 'N',
 
@@ -123,15 +123,15 @@ CREATE TABLE if not exists trait
 );
 
 #
-# Create the 'trait_topology' table.
-# This defines the relationship of traits to each other.
+# Create the 'dossier_topology' table.
+# This defines the relationship of dossiers to each other.
 # It allows for multiple parenting.   This is not necessarily a
 # tree structure, although a tree structure can be created.   The likely
-# configuration will be several individual traits, with no topology, and
+# configuration will be several individual dossiers, with no topology, and
 # maybe a few with parents.
 #
-DROP TABLE IF EXISTS `trait_topology`;
-CREATE TABLE if not exists trait_topology
+DROP TABLE IF EXISTS `dossier_topology`;
+CREATE TABLE if not exists dossier_topology
 (
 	#
 	# Timestamp of the insert or last modification of this record.
@@ -141,24 +141,24 @@ CREATE TABLE if not exists trait_topology
 	#
 	# Trait ID
 	#
-	trait_id INT UNSIGNED NOT NULL,
+	dossier_id INT UNSIGNED NOT NULL,
 
 	#
-	# Parent trait ID
+	# Parent dossier ID
 	#
-	parent_trait_id INT UNSIGNED NOT NULL,
+	parent_dossier_id INT UNSIGNED NOT NULL,
 
-	PRIMARY KEY(trait_id,parent_trait_id)
+	PRIMARY KEY(dossier_id,parent_dossier_id)
 );
 
 #
 # Create the 'metadata' table.
 # This table is used to store anything that is used
-# to aid in the deployment of traits or hosts at a customer site.
+# to aid in the deployment of dossiers or hosts at a customer site.
 # e.g. There may be graphics embedded in here to display 
 # on an advanced user interface.  Or it could be used to
 # contain names and phone numbers of people responsible for
-# administering the trait if used over a wide-area-network.
+# administering the dossier if used over a wide-area-network.
 # whatever...
 #
 DROP TABLE IF EXISTS `metadata`;
@@ -191,8 +191,8 @@ CREATE TABLE if not exists metadata
 #
 # Trait to metadata mapping.
 #
-DROP TABLE IF EXISTS `trait_to_meta`;
-CREATE TABLE if not exists trait_to_meta
+DROP TABLE IF EXISTS `dossier_to_meta`;
+CREATE TABLE if not exists dossier_to_meta
 (
 	#
 	# Timestamp of the insert or last modification of this record.
@@ -202,14 +202,14 @@ CREATE TABLE if not exists trait_to_meta
 	#
 	# Trait ID
 	#
-	trait_id INT UNSIGNED NOT NULL,
+	dossier_id INT UNSIGNED NOT NULL,
 
 	#
 	# Metadata ID
 	#
 	metadata_id INT UNSIGNED NOT NULL,
 
-	PRIMARY KEY (trait_id,metadata_id)
+	PRIMARY KEY (dossier_id,metadata_id)
 );
 
 #
@@ -237,13 +237,13 @@ CREATE TABLE if not exists host_to_meta
 );
 
 #
-# Create the 'trait_acl' table.
-# This maintains the user access control lists for each trait.    By default
-# the ACLs are inherited by the child traits of a particular trait.
+# Create the 'dossier_acl' table.
+# This maintains the user access control lists for each dossier.    By default
+# the ACLs are inherited by the child dossiers of a particular dossier.
 # If the 'noinherit' flag is set, then this is not the case.
 #
-DROP TABLE IF EXISTS `trait_acl`;
-CREATE TABLE if not exists trait_acl
+DROP TABLE IF EXISTS `dossier_acl`;
+CREATE TABLE if not exists dossier_acl
 (
 	#
 	# Timestamp of the insert or last modification of this record.
@@ -253,7 +253,7 @@ CREATE TABLE if not exists trait_acl
 	#
 	# Class ID
 	#
-	trait_id INT UNSIGNED NOT NULL,
+	dossier_id INT UNSIGNED NOT NULL,
 
 	#
 	# Username or Groupname 
@@ -290,28 +290,28 @@ CREATE TABLE if not exists trait_acl
 	#
 	can_execute ENUM('N','Y') NOT NULL DEFAULT 'N',
 
-	PRIMARY KEY (trait_id,name)
+	PRIMARY KEY (dossier_id,name)
 );
 
 #
 # Table structure for table `hosts`
 # Hosts are computers that are managed by cfgmaster.
 #
-# Hosts can be attached to multiple traits in the hierarchy.
-# The host will inherit properties from its trait parents.  This
+# Hosts can be attached to multiple dossiers in the hierarchy.
+# The host will inherit properties from its dossier parents.  This
 # can lead to loops and other problems.   For instance, if a host
-# is parented by a trait that says it's in one datacenter and another
-# trait that says it's in another datacenter, then we have an impossible
+# is parented by a dossier that says it's in one datacenter and another
+# dossier that says it's in another datacenter, then we have an impossible
 # situation.  We need a way to limit certain properties to a single
-# instance.  i.e. a host (or trait) cannot inherit, or set, multiple
+# instance.  i.e. a host (or dossier) cannot inherit, or set, multiple
 # locations.
 # One way to solve this problem is to have metadata types that are 
-# pervasive.   i.e. If a trait has a physical location associated with
-# it, then no child trait (or host) may override this.   A physical
+# pervasive.   i.e. If a dossier has a physical location associated with
+# it, then no child dossier (or host) may override this.   A physical
 # location is a physical location.   The location can be enhanced, but
-# not replaced.  i.e. We may have a trait called 'London' which sets a
-# country of 'England' and a city of 'London'.   No trait (or host) beneath
-# it may redefine country or city.   But a trait underneath could set
+# not replaced.  i.e. We may have a dossier called 'London' which sets a
+# country of 'England' and a city of 'London'.   No dossier (or host) beneath
+# it may redefine country or city.   But a dossier underneath could set
 # an address.   We may further define location to a data center name, floor,
 # room, row, and rack.   
 #
@@ -338,7 +338,7 @@ CREATE TABLE `hosts` (
 );
 
 #
-# Table structure for table `host_topology`.  What trait(s)
+# Table structure for table `host_topology`.  What dossier(s)
 # is this host attached to?
 #
 DROP TABLE IF EXISTS `host_topology`;
@@ -351,10 +351,10 @@ CREATE TABLE `host_topology` (
 	#host ID
 	`host_id` INT NOT NULL,
 
-	#trait ID
-	`trait_id` INT NOT NULL,
+	#dossier ID
+	`dossier_id` INT NOT NULL,
 
-	PRIMARY KEY (`host_id`,`trait_id`)
+	PRIMARY KEY (`host_id`,`dossier_id`)
 );
 
 #
@@ -541,12 +541,12 @@ CREATE TABLE if not exists resource_topology
 );
 
 #
-# Create the 'trait_to_resource' table.
-# This assigns a resource to a trait.
-# This allows a resource to exist in multiple traits. 
+# Create the 'dossier_to_resource' table.
+# This assigns a resource to a dossier.
+# This allows a resource to exist in multiple dossiers. 
 #
-DROP TABLE IF EXISTS `trait_to_resource`;
-CREATE TABLE if not exists trait_to_resource
+DROP TABLE IF EXISTS `dossier_to_resource`;
+CREATE TABLE if not exists dossier_to_resource
 (
 	#
 	# Timestamp of the insert or last modification of this record.
@@ -556,8 +556,8 @@ CREATE TABLE if not exists trait_to_resource
 	#
 	# Class ID
 	#
-	trait_id INT UNSIGNED NOT NULL,
-		PRIMARY KEY (trait_id,resource_id),
+	dossier_id INT UNSIGNED NOT NULL,
+		PRIMARY KEY (dossier_id,resource_id),
 
 	#
 	# Resource ID
@@ -570,8 +570,8 @@ CREATE TABLE if not exists trait_to_resource
 #
 # Create the 'resource_exception' table.
 # This table is used to tell Redeye to "ignore" a particular
-# resource for a given trait.  It is also possible to ignore
-# the resource for all traits by leaving the trait_id 0.
+# resource for a given dossier.  It is also possible to ignore
+# the resource for all dossiers by leaving the dossier_id 0.
 # This might be useful if one wanted to temporarily prevent
 # the rollout of a resource.
 #
@@ -584,11 +584,11 @@ CREATE TABLE if not exists resource_exception
 	timestamp DATETIME,
 
 	#
-	# Class ID of imposing trait or 0 if it applies
-	# to all inheriting traits of this resource.
+	# Class ID of imposing dossier or 0 if it applies
+	# to all inheriting dossiers of this resource.
 	#
-	trait_id INT UNSIGNED NOT NULL,
-		PRIMARY KEY (trait_id,resource_id),
+	dossier_id INT UNSIGNED NOT NULL,
+		PRIMARY KEY (dossier_id,resource_id),
 
 	#
 	# Resource ID
@@ -804,20 +804,20 @@ CREATE TABLE if not exists resource_to_helper
 );
 
 #
-# Mapping between a trait and helpers
+# Mapping between a dossier and helpers
 # that belong to it.  These are helpers that
 # will be used, by default, if no resource-specific
 # helpers are found.
 #
-CREATE TABLE if not exists trait_to_helper
+CREATE TABLE if not exists dossier_to_helper
 (
 	#
 	# Timestamp of the insert or last modification of this record.
 	#
 	timestamp DATETIME,
 
-	trait_id INT UNSIGNED NOT NULL,
-		PRIMARY KEY (trait_id,helper_name),
+	dossier_id INT UNSIGNED NOT NULL,
+		PRIMARY KEY (dossier_id,helper_name),
 	helper_name VARCHAR(64) NOT NULL 
 );
 
@@ -855,7 +855,7 @@ CREATE TABLE if not exists log
 	# Class ID
 	# Where did it happen? (e.g. What host or complex?)
 	#
-	trait_id INT UNSIGNED,
+	dossier_id INT UNSIGNED,
 
 	#
 	# Resource ID
@@ -893,7 +893,7 @@ grant select,delete,insert,update on * to cfgmaster identified by '2bornot2b';
 #
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-rpm','BINARY','/bin/rpm');
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-rpm','INSTALL_ARGS','--upgrade');
-INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-rpm','REMOVE_ARGS','--erase --traitps');
+INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-rpm','REMOVE_ARGS','--erase --dossierps');
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-archiveapplication-x-debian-package','BINARY','/bin/dpkg');
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-archiveapplication-x-debian-package','INSTALL_ARGS','--install');
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-archiveapplication-x-debian-package','REMOVE_ARGS','--remove');
@@ -903,4 +903,4 @@ INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-svr4-pack
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-svr4-package','REMOVE_ARGS','-n');
 INSERT INTO mime_metadata (mime,metakey,metaval) VALUES('application/x-svr4-package','ADMIN','mail=root\ninstance=unique\npartial=nocheck\nrunlevel=nocheck\nidepend=nocheck\nrdepend=nocheck\nspace=nocheck\nsetuid=nocheck\nconflict=nocheck\naction=nocheck\nbasedir=default\n');
 INSERT INTO users(username,password) VALUES('admin',MD5('change_me'));
-#INSERT INTO trait (trait_id,name,traitkey,is_trait,readonly) VALUES(1,'_cfgmaster_root_','','N','N');
+#INSERT INTO dossier (dossier_id,name,dossierkey,is_dossier,readonly) VALUES(1,'_cfgmaster_root_','','N','N');
