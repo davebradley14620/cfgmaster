@@ -1,2 +1,0 @@
-# cfgmaster
-CfgMaster
