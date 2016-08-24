@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.20.47" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.cfgmaster.view" ClientType="Generic">
+  <pageMap>
+    <page path="/users_and_groups.jsf" usageId="com_cfgmaster_view_users_and_groupsPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_cfgmaster_view_users_and_groupsPageDef" path="com.cfgmaster.view.pageDefs.users_and_groupsPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="com.cfgmaster.model"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

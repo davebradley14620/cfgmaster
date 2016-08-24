@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AppModule"
+  Version="12.2.1.20.47"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="UsersView1"
+    ViewObjectName="com.cfgmaster.model.vo.UsersView"/>
+  <ViewUsage
+    Name="UserToGroupsView1"
+    ViewObjectName="com.cfgmaster.model.vo.UserToGroupsView"/>
+  <ViewUsage
+    Name="GroupsView1"
+    ViewObjectName="com.cfgmaster.model.vo.GroupsView"/>
+  <ViewUsage
+    Name="UserToGroupsView2"
+    ViewObjectName="com.cfgmaster.model.vo.UserToGroupsView"/>
+  <ViewLinkUsage
+    Name="FkUserToGroupsUsersViewLink"
+    ViewLinkObjectName="com.cfgmaster.model.vo.assoc.FkUserToGroupsUsersViewLink"
+    SrcViewUsageName="com.cfgmaster.model.vo.AppModule.UsersView1"
+    DstViewUsageName="com.cfgmaster.model.vo.AppModule.UserToGroupsView1"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="FkUsersToGroupsGroupsViewLink"
+    ViewLinkObjectName="com.cfgmaster.model.vo.assoc.FkUsersToGroupsGroupsViewLink"
+    SrcViewUsageName="com.cfgmaster.model.vo.AppModule.GroupsView1"
+    DstViewUsageName="com.cfgmaster.model.vo.AppModule.UserToGroupsView2"
+    Reversed="false"/>
+</AppModule>

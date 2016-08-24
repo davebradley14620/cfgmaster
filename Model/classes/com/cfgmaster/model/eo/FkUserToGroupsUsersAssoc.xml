@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FkUserToGroupsUsersAssoc"
+  Version="12.2.1.20.47"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="Users1"
+    Cardinality="1"
+    Source="true"
+    Owner="com.cfgmaster.model.eo.Users">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="Users1"/>
+      <Attr Name="_foreignKey" Value="com.cfgmaster.model.eo.Users.Primary1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.cfgmaster.model.eo.Users.Id"/>
+      <Item Value="com.cfgmaster.model.eo.Users.Username"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="UserToGroups1"
+    Cardinality="-1"
+    Owner="com.cfgmaster.model.eo.UserToGroups">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="UserToGroups1"/>
+      <Attr Name="_foreignKey" Value="com.cfgmaster.model.eo.UserToGroups.FkUserToGroupsUsers"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.cfgmaster.model.eo.UserToGroups.UserId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,12 @@
+//Groovy Scripts for com.cfgmaster.model.eo.Groups
+
+package com.cfgmaster.model.eo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="Timestamp")
+def Timestamp_ExpressionScript_Expression()
+{
+now()
+}
+

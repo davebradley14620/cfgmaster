@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE OperationDefinitions SYSTEM "jbo_03_01.dtd">
+<OperationDefinitions xmlns="http://xmlns.oracle.com/bc4j" Name="GroupsOperations">
+  <ExpressionCodeSource
+    Name="GroupsRow"
+    Type="Static"
+    URI="com/cfgmaster/model/eo/Groups.bcs"/>
+</OperationDefinitions>

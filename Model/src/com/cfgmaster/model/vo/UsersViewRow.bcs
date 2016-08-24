@@ -1,0 +1,12 @@
+//Groovy Scripts for com.cfgmaster.model.vo.UsersView
+
+package com.cfgmaster.model.vo
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="Timestamp")
+def Timestamp_ExpressionScript_Expression()
+{
+now()
+}
+

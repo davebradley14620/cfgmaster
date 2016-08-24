@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.20.47" id="users_and_groupsPageDef"
+                Package="com.cfgmaster.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="GroupsView1" RangeSize="25" DataControl="AppModuleDataControl" id="GroupsView1Iterator"/>
+    <iterator Binds="UsersView1" RangeSize="25" DataControl="AppModuleDataControl" id="UsersView1Iterator"/>
+    <iterator Binds="UserToGroupsView3" RangeSize="25" DataControl="AppModuleDataControl"
+              id="UserToGroupsView3Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="GroupsView1Iterator" id="Timestamp">
+      <AttrNames>
+        <Item Value="Timestamp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="GroupsView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="GroupsView1Iterator" id="Groupname">
+      <AttrNames>
+        <Item Value="Groupname"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="GroupsView1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="GroupsView1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="GroupsView1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="GroupsView1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <attributeValues IterBinding="UsersView1Iterator" id="Timestamp1">
+      <AttrNames>
+        <Item Value="Timestamp"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UsersView1Iterator" id="Id1">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UsersView1Iterator" id="Username">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="UsersView1Iterator" id="Password">
+      <AttrNames>
+        <Item Value="Password"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="UsersView1Iterator" id="First1" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="UsersView1Iterator" id="Previous1" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="UsersView1Iterator" id="Next1" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="UsersView1Iterator" id="Last1" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="UserToGroupsView3Iterator" id="UserToGroupsView3">
+      <nodeDefinition DefName="com.cfgmaster.model.vo.UserToGroupsView" Name="UserToGroupsView30">
+        <AttrNames>
+          <Item Value="Timestamp"/>
+          <Item Value="UserId"/>
+          <Item Value="GroupId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

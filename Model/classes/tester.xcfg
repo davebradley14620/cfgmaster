@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.cfgmaster.model.AppModule">
+      <AppModuleConfig name="156B5B9F15F" DeployPlatform="LOCAL" DBconnection="java:comp/env/jdbc/Connection1DS" JDBCName="Connection1" BC4JConfigName="AppModuleLocal" IsLazyLoadingTrue="true" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory" ApplicationName="com.cfgmaster.model.AppModule" jbo.project="com.cfgmaster.model.Model">
+         <Database jbo.TypeMapEntries="Java" jbo.locking.mode="optimistic" jbo.sql92.JdbcDriverClass="com.mysql.jdbc.Driver" JDBCDataSource="java:comp/env/jdbc/Connection1DS" jbo.SQLBuilder="SQL92"/>
+         <Security AppModuleJndiName="com.cfgmaster.model.AppModule"/>
+         <Tester FullProxyInterfaceName="com.cfgmaster.model.common.AppModule"/>
+         <Custom ns0:LastUsedConfiguration="AppModuleLocal" ns0:tester_classloader_enabled="true" ns0:_testers_credentials_needed="false" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

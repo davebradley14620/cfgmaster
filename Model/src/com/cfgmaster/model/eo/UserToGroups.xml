@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UserToGroups"
+  Version="12.2.1.20.47"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="user_to_groups"
+  AliasName="UserToGroups"
+  BindingStyle="JDBC">
+  <Attribute
+    Name="Timestamp"
+    ColumnName="timestamp"
+    SQLType="TIMESTAMP"
+    Type="java.sql.Timestamp"
+    ColumnType="DATETIME"
+    TableName="user_to_groups"
+    IsUpdateable="while_insert"/>
+  <Attribute
+    Name="UserId"
+    IsNotNull="true"
+    ColumnName="user_id"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="user_to_groups"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="GroupId"
+    IsNotNull="true"
+    ColumnName="group_id"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INT"
+    TableName="user_to_groups"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="Users"
+    Association="com.cfgmaster.model.eo.assoc.FkUserToGroupsUserAssociation"
+    AssociationEnd="com.cfgmaster.model.eo.assoc.FkUserToGroupsUserAssociation.Users"
+    AssociationOtherEnd="com.cfgmaster.model.eo.assoc.FkUserToGroupsUserAssociation.UserToGroups"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="Groups1"
+    Association="com.cfgmaster.model.eo.assoc.FkUserToGroupsGroupAssociation"
+    AssociationEnd="com.cfgmaster.model.eo.assoc.FkUserToGroupsGroupAssociation.Groups1"
+    AssociationOtherEnd="com.cfgmaster.model.eo.assoc.FkUserToGroupsGroupAssociation.UserToGroups1"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <ViewLinkAccessor
+    Name="UsersView"
+    ViewLink="com.cfgmaster.model.vo.assoc.FkUserToGroupsUsersViewLink"
+    ViewLinkEnd="com.cfgmaster.model.vo.assoc.FkUserToGroupsUsersViewLink.UsersView"
+    ViewLinkOtherEnd="com.cfgmaster.model.vo.assoc.FkUserToGroupsUsersViewLink.UserToGroupsView"
+    Type="oracle.jbo.server.ViewRowImpl"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="GroupsView"
+    ViewLink="com.cfgmaster.model.vo.assoc.FkUsersToGroupsGroupsViewLink"
+    ViewLinkEnd="com.cfgmaster.model.vo.assoc.FkUsersToGroupsGroupsViewLink.GroupsView"
+    ViewLinkOtherEnd="com.cfgmaster.model.vo.assoc.FkUsersToGroupsGroupsViewLink.UserToGroupsView1"
+    Type="oracle.jbo.server.ViewRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="Primary1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRIMARY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.cfgmaster.model.eo.UserToGroups.UserId"/>
+      <Item Value="com.cfgmaster.model.eo.UserToGroups.GroupId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkUserToGroupsGroups">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_user_to_groups_groups"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.cfgmaster.model.eo.UserToGroups.GroupId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="FkUserToGroupsUsers">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="PRIMARY"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_user_to_groups_users"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.cfgmaster.model.eo.UserToGroups.UserId"/>
+    </AttrArray>
+  </Key>
+</Entity>
